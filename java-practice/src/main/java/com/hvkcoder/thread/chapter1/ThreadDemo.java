@@ -1,4 +1,4 @@
-package com.hvkcoder.thread;
+package com.hvkcoder.thread.chapter1;
 
 import org.junit.jupiter.api.Test;
 

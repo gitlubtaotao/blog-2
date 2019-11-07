@@ -150,7 +150,8 @@ hr {
 /*代码块*/
 pre {
   overflow-x: scroll;
-  border:2px solid #eee;
+	border:2px solid #eee;
+	margin-top: -25px;
 }
 pre code {
   display: -webkit-box !important;
