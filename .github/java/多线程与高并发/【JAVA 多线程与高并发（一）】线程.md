@@ -83,58 +83,40 @@ public class LambdaThread {
 }
 ```
 
-## 线程中常用的方法
-
-- isAlive()：表示线程是否还未终止；
-- Thread.sleep()：设置当前线程睡眠指定毫秒数；
-- Thread.yield()：当前线程让出 CPU 资源，进入就绪队列等待调度，但是等待时间不确定；
-- Thread.join()：当前线程等待指定线程结束后才能继续执行；
-
-<br/>
-
-```java
-public static void main(String[] args) {
-	String name = Thread.currentThread().getName();
-	System.out.println(name + " start.");
-
-	Runnable runnable = () -> {
-		String threadName = Thread.currentThread().getName();
-		System.out.println(threadName + " start.");
-
-		for(int i = 0; i < 5; i++) {
-			System.out.println(threadName + " loop at "+ i);
-		}
-
-		System.out.println(threadName + " end.");
-	};
-
-	Thread aThread = new Thread(runnable, "aThread");
-	aThread.start();
-
-  try {
-    aThread.join();
-  } catch (InterruptedException e) {
-    e.printStackTrace();
-  }
-
-	System.out.println(name + " end.");
-}
-```
-
-output
-
-```
-main start.
-aThread start.
-aThread loop at 0
-aThread loop at 1
-aThread loop at 2
-aThread loop at 3
-aThread loop at 4
-aThread end.
-main end.
-```
-
 ## 线程的状态
 
-> 当线程被创建并启动后，它要经过 新建（New）、运行（Runnable）、阻塞（Blocked）、等待（Waiting）、超时等待（Timed_Waiting）、终止（Terminate）6 种状态，这 6 中状态定义在 Thread.State 中。
+> 当线程被创建并启动后，它要经过 新建（NEW）、运行（RUNNABLE）、阻塞（BLOCKED）、等待（WAITING）、超时等待（TIMED_WAITING）、终止（TERMINATED）6 种状态，这 6 中状态定义在 Thread.State 中。
+
+![线程状态图](https://s2.ax1x.com/2019/11/18/M6wADx.png)
+
+#### 新建状态(NEW)
+
+实现 Runnable 接口和继承 Thread 类可以得到一个线程类，通过 new 关键字实例化，但是没有调用 start()方法。
+
+#### 运行状态(RUNNABLE)
+
+Java 中将 就绪状态(READY) 和 运行中状态(RUNNING) 统称为运行状态(RUNNABLE)。当线程对象被创建并调用 start() 方法，此时该线程进入就绪状态(READY)，等待线程调度器执行。
+
+就绪状态(READY) 还可通过以下方式进入：
+
+- 调用当前线程的 yield() 方法，当前线程被挂起；
+- 当前线程 sleep() 方法结束、其他线程 join() 方法结束、等待用户输入完毕、某个线程拿到对象锁；
+- 当线程时间片用完；
+
+当线程调度器从可运行池中选择一个线程作为当前执行线程时，该线程进入运行中状态(RUNNING)。这也是线程进入运行中状态(RUNNING)的唯一方式。
+
+#### 阻塞状态(BLOCKED)
+
+当前线程在进入 synchronized 关键字修饰的方法或代码(获取锁)时的状态。
+
+#### 等待状态(WAITING)
+
+处于这种状态的线程不会被分配 CPU 执行时间，它们要等待被显式地唤醒，否则会处于无限等待的状态。
+
+#### 超时等待(TIMED_WAITING)
+
+处于这种状态的线程会到达一定事件后被自动唤醒。
+
+#### 终止(TERMINATE)
+
+当线程程序执行完成，该线程将会终止，**在一个终止的线程上调用 start()方法，会抛出 java.lang.IllegalThreadStateException 异常**。
