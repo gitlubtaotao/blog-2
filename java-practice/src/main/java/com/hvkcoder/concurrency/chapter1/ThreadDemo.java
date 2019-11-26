@@ -1,5 +1,7 @@
 package com.hvkcoder.concurrency.chapter1;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -50,5 +52,10 @@ public class ThreadDemo {
     public void run() {
       System.out.println("ImplementRunnable");
     }
+  }
+
+  @Test
+  public void testSay() {
+    System.out.println("fdsa");
   }
 }
