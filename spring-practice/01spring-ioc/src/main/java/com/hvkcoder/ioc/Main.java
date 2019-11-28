@@ -1,6 +1,8 @@
 package com.hvkcoder.ioc;
 
+import com.hvkcoder.ioc.circular_dependency.A;
 import com.hvkcoder.ioc.entity.User;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -48,5 +50,20 @@ public class Main {
   @Test
   public void testScopePrototype() {
     System.out.println(context.getBean("user-prototype") == context.getBean("user-prototype"));
+  }
+
+  /**
+   * TODO: Spring 中的循环依赖
+   *
+   * <p>单例中的引用对象也是单例的
+   *
+   * <p>Spring 单例模式的对象会直接实例化，prototype 作用域下会检查引用是否实例化，如果引用未实例化，则暂停该 Bean 的实例，去实例化引用对象
+   */
+  @Test
+  public void testCircularDependency() {
+    A a = context.getBean("a", A.class);
+    System.out.println(ToStringBuilder.reflectionToString(a));
+    System.out.println(ToStringBuilder.reflectionToString(a.getB()));
+    System.out.println(ToStringBuilder.reflectionToString(a.getB().getC()));
   }
 }

@@ -4,11 +4,11 @@
 
 ## Spring 框架的容器
 
-Spring 框架中的一切 Java 类都是资源，这些资源都是 Bean，而容纳这些 Bean 的是 Spring 框架所提供的 Ioc 容器，Spring 框架提供了两个核心容器，分别是 `BeanFactory` 和 `ApplicationContext`。
+Spring 框架中的一切 Java 类都是资源，这些资源都是 Bean，而容纳这些 Bean 的是 Spring 框架所提供的 IoC 容器，Spring 框架提供了两个核心容器，分别是 `BeanFactory` 和 `ApplicationContext`。
 
 ### BeanFactory
 
-> BeanFactory 由 `org.springframework.beans.factory.BeanFactory` 接口定义，是基础类型的 IoC 容器，提供完整的 IoC 服务支持。相当于就是一个关闭 Bean 的工厂，主要负责管理初始化各种 Bean，并调用它们的生命周期。 BeanFactory 接口提供了几个实现类，，最为常用的是 XmlBeanFactory 类，该类会根据 XML 配置文件中的定义来装配 Bean。
+> BeanFactory 由 `org.springframework.beans.factory.BeanFactory` 接口定义，是基础类型的 IoC 容器，提供完整的 IoC 服务支持。相当于就是一个管理 Bean 的工厂，主要负责管理初始化各种 Bean，并调用它们的生命周期。 BeanFactory 接口提供了几个实现类，，最为常用的是 XmlBeanFactory 类，该类会根据 XML 配置文件中的定义来装配 Bean。
 
 ### ApplicationContext
 
@@ -57,4 +57,8 @@ Spring 容器创建一个 Bean 的实例时，不仅可以完成 Bean 的实例�
 
 - prototype (原型)
 
-> 对需要保持会话状态的 Bean 应该使用 `prototype` 作用域，Spring 容器会为每个对该 Bean 的请求都创建一个新的实例。
+> 对需要保持会话状态的 Bean 应该使用 `prototype` 作用域，Spring 容器会为每个对该 Bean 的请求都创建一个新的实例。在 `prototype` 作用域下，会先检查引用是否实例化，如果未实例化，则暂停该 Bean 的实例，去实例化引用对象。
+
+### Bean 的生命周期
+
+> Spring 容器在 `singleton` 作用域下，可以精确的知道该 Bean 的生命周期。对于 `prototype` 作用域 Spring 只负责创建，当容器创建了 Bean 实例后，Bean 的实例就交给客户端代码管理，Spring 容器将不再跟踪器生命周期。

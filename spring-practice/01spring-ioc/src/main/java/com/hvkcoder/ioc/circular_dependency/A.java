@@ -6,4 +6,13 @@ package com.hvkcoder.ioc.circular_dependency;
  * @since V1.0
  */
 public class A {
+  private B b;
+
+  public B getB() {
+    return b;
+  }
+
+  public void setB(B b) {
+    this.b = b;
+  }
 }
