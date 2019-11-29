@@ -6,4 +6,5 @@ package com.hvkcoder.ioc.annotation.service;
  * @since V1.0
  */
 public interface UserService {
+  public void save();
 }

@@ -62,3 +62,45 @@ Spring 容器创建一个 Bean 的实例时，不仅可以完成 Bean 的实例�
 ### Bean 的生命周期
 
 > Spring 容器在 `singleton` 作用域下，可以精确的知道该 Bean 的生命周期。对于 `prototype` 作用域 Spring 只负责创建，当容器创建了 Bean 实例后，Bean 的实例就交给客户端代码管理，Spring 容器将不再跟踪器生命周期。
+
+### Bean 的装载方式
+
+> 除了使用 XML 的方式依赖注入外，还可以通过 基于注解(Annotation)的装配 和 自动装配(autowire) 来实现 Bean 的依赖注入。
+
+- 注解(Annotation)
+
+  - @Component: 用于描述 Spirng 中的 Bean，是一个泛化概念，仅仅表示一个组件(Bean)，并且可以作用在任何层次。
+  - @Repository: 用于将数据访问层(DAO 层) 的类标识为 Spring 中的 Bean。
+  - @Service: 用于将业务层(Service 层) 的类标识为 Spring 中的 Bean。
+  - @Controller: 用于将控制层( Controller 层 ) 的类标识为 Spring 的 Bean。
+  - @Autowired: 用于对 Bean 的属性变量、属性的 setter 方法及构造方法进行标注，配合对应的注解处理器完成 Bean 的自动配置工作。
+  - @Resource: 作用于 Autowired 一样，区别在于 `@Autowired` 默认按照 Bean 类型装配，`@Resource` 默认按照 Bean 实例名称进行装配。
+  - @Qualifier: 与 `@Autowired` 注解配合使用，会将默认的 Bean 类型装配修改为按 Bean 的实例名称装配，Bean 的实例名由 `@Qualifier` 注解的参数指定。
+
+配置文件只需配置以下内容：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+	                       http://www.springframework.org/schema/context
+	                       http://www.springframework.org/schema/context/spring-context.xsd"
+>
+
+    <!--  扫描指定包下的 带注解的类，纳入spring管理 -->
+    <context:component-scan base-package="扫描指定包"/>
+</beans>
+```
+
+- 自动装配(autowire)
+
+> Spring 的 `<bean>` 元素中包含一个 `autowire` 属性，通过设置 `autowire` 的属性值来自动装配 Bean。
+
+| 属性值  | 说明                                                                                                      |
+| ------- | --------------------------------------------------------------------------------------------------------- |
+| default | 由 `<bean>` 的上级标签 `<beans>` 的 `default-autowire` 属性值确定。                                       |
+| byName  | 根据属性的名称自动装配。容器将根据名称查找属性完全一致的 Bean，并将其属性自动装配                         |
+| byType  | 根据属性的数据类型(Type) 自动装配，如果一个 Bean 的数据类型，兼容另一个 Bean 中属性的数据类型，自动装配。 |

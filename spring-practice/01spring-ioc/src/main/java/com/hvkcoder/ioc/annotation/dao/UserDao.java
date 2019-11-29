@@ -1,4 +1,4 @@
-package com.hvkcoder.ioc.annotation;
+package com.hvkcoder.ioc.annotation.dao;
 
 /**
  * @author h-vk

@@ -1,5 +1,6 @@
 package com.hvkcoder.ioc;
 
+import com.hvkcoder.ioc.annotation.controller.UserController;
 import com.hvkcoder.ioc.circular_dependency.A;
 import com.hvkcoder.ioc.entity.User;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -65,5 +66,17 @@ public class Main {
     System.out.println(ToStringBuilder.reflectionToString(a));
     System.out.println(ToStringBuilder.reflectionToString(a.getB()));
     System.out.println(ToStringBuilder.reflectionToString(a.getB().getC()));
+  }
+
+  /** TODO: 通过注解方式注入 */
+  @Test
+  public void testAnnotationDI() {
+    ApplicationContext applicationContext =
+        new ClassPathXmlApplicationContext("annotationContext.xml");
+
+    UserController userController =
+        applicationContext.getBean("userController", UserController.class);
+
+    userController.save();
   }
 }
