@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>01spring-ioc</module>
+        <module>02spring-aop</module>
     </modules>
 
     <dependencies>
