@@ -63,6 +63,14 @@ Spring 容器创建一个 Bean 的实例时，不仅可以完成 Bean 的实例�
 
 > Spring 容器在 `singleton` 作用域下，可以精确的知道该 Bean 的生命周期。对于 `prototype` 作用域 Spring 只负责创建，当容器创建了 Bean 实例后，Bean 的实例就交给客户端代码管理，Spring 容器将不再跟踪器生命周期。
 
+1. 根据配置文件实例化 Bean；
+2. 利用依赖注入设置 Bean 的属性值；
+3. 如果 Bean 实现了 `BeanNameAware` 接口，则 Spring 调用 `setBeanName` 方法，并传入当前 Bean 的 id 或 name 值；
+4. 如果 Bean 实现了 `BeanFactoryAware` 接口，则 Spring 调用 `setBeanFactory` 方法，并传入当前工厂实例引用；
+5. 如果 Bean 实现了 `ApplicationContextAware` 接口，则 Spring 调用 `setApplicationContext` 方法，并传入 ApplicationContext 实例引用；
+6. 如果 Bean 实现了 `BeanPostProcessor` 接口，则 Spring 调用 `postProcessBeforeInitialization` 方法，对 Bean 进行加工，AOP 就是通过这个接口类实现的；
+7.
+
 ### Bean 的装载方式
 
 > 除了使用 XML 的方式依赖注入外，还可以通过 基于注解(Annotation)的装配 和 自动装配(autowire) 来实现 Bean 的依赖注入。
@@ -74,7 +82,7 @@ Spring 容器创建一个 Bean 的实例时，不仅可以完成 Bean 的实例�
   - @Service: 用于将业务层(Service 层) 的类标识为 Spring 中的 Bean。
   - @Controller: 用于将控制层( Controller 层 ) 的类标识为 Spring 的 Bean。
   - @Autowired: 用于对 Bean 的属性变量、属性的 setter 方法及构造方法进行标注，配合对应的注解处理器完成 Bean 的自动配置工作。
-  - @Resource: 作用于 Autowired 一样，区别在于 `@Autowired` 默认按照 Bean 类型装配，`@Resource` 默认按照 Bean 实例名称进行装配。
+  - @Resource: 作用于 Autowired 一样，区别在于 `@Autowired` 默认按照 Bean 类型装 w 配，`@Resource` 默认按照 Bean 实例名称进行装配。
   - @Qualifier: 与 `@Autowired` 注解配合使用，会将默认的 Bean 类型装配修改为按 Bean 的实例名称装配，Bean 的实例名由 `@Qualifier` 注解的参数指定。
 
 配置文件只需配置以下内容：
