@@ -3,6 +3,7 @@ package com.hvkcoder.ioc;
 import com.hvkcoder.ioc.annotation.controller.UserController;
 import com.hvkcoder.ioc.circular_dependency.A;
 import com.hvkcoder.ioc.entity.User;
+import com.hvkcoder.ioc.life_cycle.LifeCycle;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -78,5 +79,11 @@ public class Main {
         applicationContext.getBean("userController", UserController.class);
 
     userController.save();
+  }
+
+  /** TODO: Bean 的生命周期 */
+  @Test
+  public void testBeanLifeCycle() {
+    LifeCycle life_cycle = context.getBean("life_cycle", LifeCycle.class);
   }
 }

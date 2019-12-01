@@ -69,7 +69,11 @@ Spring 容器创建一个 Bean 的实例时，不仅可以完成 Bean 的实例�
 4. 如果 Bean 实现了 `BeanFactoryAware` 接口，则 Spring 调用 `setBeanFactory` 方法，并传入当前工厂实例引用；
 5. 如果 Bean 实现了 `ApplicationContextAware` 接口，则 Spring 调用 `setApplicationContext` 方法，并传入 ApplicationContext 实例引用；
 6. 如果 Bean 实现了 `BeanPostProcessor` 接口，则 Spring 调用 `postProcessBeforeInitialization` 方法，对 Bean 进行加工，AOP 就是通过这个接口类实现的；
-7.
+7. 如果 Bean 实现了 `InitializingBean` 接口， 则 Spring 调用 `afterPropertiesSet` 方法；
+8. 如果在配置文件中通过 `init-method` 属性指定初始化方法，则调用该初始化方法；
+9. 如果 `Bean` 实现了 `BeanPostProcessor` 接口，则 Spring 调用 `postProcessAfterInitialization` 方法，此时 Bean 已经可以被 应用系统使用；
+10. 如果 `<bean>` 找那个指定该 Bean 的作用范围是 `singleton`，则该 Bean 放入 Spring IoC 的缓存池中，Spring 将对该 Bean 做生命周期的管理；如果作用范围是 `prototype`，则将该 Bean 交给调用者，调用者管理 Bean 的生命周期；
+11. 如果 Bean 实现了 `DisposableBean` 接口，则 Spring 调用 `destory` 方法，将 Spring 中的 Bean 销毁；如果通过配置文件 `destory-method` 属性指定 Bean 的销毁方法，则 Spring 将调用该方法进行销毁。
 
 ### Bean 的装载方式
 

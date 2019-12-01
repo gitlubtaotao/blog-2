@@ -1,10 +1,7 @@
 package com.hvkcoder.ioc.life_cycle;
 
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.BeanNameAware;
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.*;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -21,7 +18,8 @@ public class LifeCycle
         BeanFactoryAware,
         ApplicationContextAware,
         BeanPostProcessor,
-        InitializingBean {
+        InitializingBean,
+        DisposableBean {
   private String name;
 
   public String getName() {
@@ -69,6 +67,22 @@ public class LifeCycle
   @Override
   public void afterPropertiesSet() throws Exception {
     System.out.println(
-        "5.=======> 如果 Bean 实现了 InitializingBean 接口，则 Spring 调用 afterPropertiesSet.");
+        "7.=======> 如果 Bean 实现了 InitializingBean 接口，则 Spring 调用 afterPropertiesSet.");
+  }
+
+  @Override
+  public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+    System.out.println(
+        "9. 如果 Bean 实现了 BeanPostProcessor 接口，则 Spring 调用 postProcessAfterInitialization 方法， 此时 Bean 可以在应用程序中使用 "
+            + bean
+            + "  "
+            + beanName);
+    return bean;
+  }
+
+  @Override
+  public void destroy() throws Exception {
+    System.out.println(
+        "11. 如果 Bean 实现了 DisposableBean 接口，则 Spring 调用 destory 方法， 对 Spring 中的 Bean 销毁");
   }
 }
