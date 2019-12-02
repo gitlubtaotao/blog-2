@@ -11,6 +11,7 @@
     <modules>
         <module>01spring-ioc</module>
         <module>02spring-aop</module>
+        <module>03spring-boot</module>
     </modules>
 
     <dependencies>
