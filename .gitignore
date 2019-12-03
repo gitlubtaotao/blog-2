@@ -5,6 +5,7 @@ target/
 !**/src/main/**
 !**/src/test/**
 out/
+rebel.xml
 
 ### STS ###
 .DS_Store
