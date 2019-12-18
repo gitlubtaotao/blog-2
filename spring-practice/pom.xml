@@ -12,6 +12,7 @@
         <module>01spring-ioc</module>
         <module>02spring-aop</module>
         <module>03spring-boot</module>
+        <module>04spring-datasource</module>
     </modules>
 
     <dependencies>
