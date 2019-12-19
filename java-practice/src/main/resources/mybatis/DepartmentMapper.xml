@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvkcoder.mybatis.mapper.DepartmentMapper">
+	<select id="selectDepartment" resultType="java.util.Map">
+		SELECT DepartmentID, DepartmentName FROM pm_department_d
+	</select>
+</mapper>
