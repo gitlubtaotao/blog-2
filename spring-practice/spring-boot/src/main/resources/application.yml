@@ -1,0 +1,17 @@
+server:
+  ## 设置端口号
+  port: 3000
+
+spring:
+  ## 设置数据库连接
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/spring_priactice_db?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  ## 指定实例化 Mapper 接口
+  type-aliases-package: com.hvkcoder.springboot.mapper
+  ## 设置对应的 SQL 映射
+  mapper-locations: classpath:mybatis/*.xml
