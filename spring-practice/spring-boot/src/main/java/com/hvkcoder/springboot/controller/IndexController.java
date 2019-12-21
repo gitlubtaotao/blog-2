@@ -21,7 +21,6 @@ public class IndexController {
 
     @RequestMapping("/")
     public List<Account> index() {
-
         return accountService.findAll();
     }
 }
