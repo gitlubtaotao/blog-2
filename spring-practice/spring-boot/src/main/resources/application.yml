@@ -15,3 +15,17 @@ mybatis:
   type-aliases-package: com.hvkcoder.springboot.mapper
   ## 设置对应的 SQL 映射
   mapper-locations: classpath:mybatis/*.xml
+
+pagehelper:
+  ## 设置分页是否合理
+  reasonable: ture
+  support-methods-arguments: true
+  page-size-zero: true
+
+# 配置输出日志级别
+logging:
+  level:
+    com:
+      hvkcoder:
+        springboot:
+          mapper: DEBUG

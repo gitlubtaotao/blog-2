@@ -23,4 +23,6 @@ public class IndexController {
     public List<Department> index() {
         return departmentService.findAllDepartment();
     }
+
+
 }
