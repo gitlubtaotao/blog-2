@@ -11,7 +11,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:
-  ## 指定实例化 Mapper 接口
+  ## 指定 Mapper 映射的包名
   type-aliases-package: com.hvkcoder.springboot.mapper
   ## 设置对应的 SQL 映射
   mapper-locations: classpath:mybatis/*.xml

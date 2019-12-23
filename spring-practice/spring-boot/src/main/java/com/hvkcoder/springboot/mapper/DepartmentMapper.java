@@ -1,6 +1,6 @@
 package com.hvkcoder.springboot.mapper;
 
-import com.hvkcoder.springboot.domain.Account;
+import com.hvkcoder.springboot.domain.Department;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -9,6 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since V1.0
  */
 @Mapper
-public interface AccountMapper extends MybatisBaseMapper<Account> {
+public interface DepartmentMapper extends MybatisBaseMapper<Department> {
 
 }

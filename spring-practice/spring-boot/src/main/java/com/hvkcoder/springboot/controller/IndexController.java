@@ -1,7 +1,7 @@
 package com.hvkcoder.springboot.controller;
 
-import com.hvkcoder.springboot.domain.Account;
-import com.hvkcoder.springboot.service.AccountService;
+import com.hvkcoder.springboot.domain.Department;
+import com.hvkcoder.springboot.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,10 +17,10 @@ import java.util.List;
 public class IndexController {
 
     @Autowired
-    private AccountService accountService;
+    private DepartmentService departmentService;
 
     @RequestMapping("/")
-    public List<Account> index() {
-        return accountService.findAll();
+    public List<Department> index() {
+        return departmentService.findAllDepartment();
     }
 }
